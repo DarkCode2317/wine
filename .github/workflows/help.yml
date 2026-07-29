@@ -1,0 +1,17 @@
+name: Build Help
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  help:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Help
+        run: |
+          chmod +x configure
+          ./configure --help
