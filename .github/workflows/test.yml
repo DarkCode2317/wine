@@ -1,0 +1,80 @@
+name: Strip Winlator ARM64
+
+on:
+  workflow_dispatch:
+
+jobs:
+  strip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download APK
+        run: |
+          wget -O app.apk "YOUR_APK_URL"
+
+      - name: Extract APK
+        run: |
+          mkdir apk
+          unzip -q app.apk -d apk
+
+      - name: Remove ARM64 files
+        run: |
+          set -e
+
+          find apk -type d \( \
+            -iname "*arm64*" -o \
+            -iname "*aarch64*" -o \
+            -iname "*x86_64*" \
+          \) -print -exec rm -rf {} +
+
+          find apk -type f \( \
+            -iname "*box64*" -o \
+            -iname "*wine64*" -o \
+            -iname "*arm64*" -o \
+            -iname "*aarch64*" -o \
+            -iname "*x86_64*" \
+          \) -print -delete
+
+      - name: Repack APK
+        run: |
+          cd apk
+          zip -qr ../Winlator-armv7-unsigned.apk .
+
+      - name: Create debug keystore
+        run: |
+          keytool -genkeypair \
+            -alias androiddebugkey \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -keystore debug.keystore \
+            -storepass android \
+            -keypass android \
+            -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: Zipalign
+        run: |
+          zipalign -f 4 \
+            Winlator-armv7-unsigned.apk \
+            Winlator-armv7-aligned.apk
+
+      - name: Sign APK
+        run: |
+          apksigner sign \
+            --ks debug.keystore \
+            --ks-pass pass:android \
+            --key-pass pass:android \
+            --out Winlator-armv7.apk \
+            Winlator-armv7-aligned.apk
+
+      - name: Verify
+        run: |
+          apksigner verify --verbose Winlator-armv7.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Winlator-armv7
+          path: Winlator-armv7.apk
