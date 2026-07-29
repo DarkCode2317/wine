@@ -12,7 +12,7 @@ jobs:
 
       - name: Download APK
         run: |
-          wget -O app.apk "YOUR_APK_URL"
+          wget -O app.apk "https://github.com/brunodev85/winlator/releases/download/v7.1.0/Winlator_7.1.apk"
 
       - name: Extract APK
         run: |
