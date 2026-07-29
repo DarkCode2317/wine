@@ -10,34 +10,26 @@ jobs:
     steps:
       - name: Download APK
         run: |
-          wget -O wine.apk "https://dl.winehq.org/wine-builds/android/wine-7.0-arm.apk"
+          wget -O install.apk "https://dl.winehq.org/wine-builds/android/wine-7.0-arm.apk"
 
       - name: Extract APK
         run: |
-          mkdir wine_apk
-          unzip wine.apk -d wine_apk
-
-      - name: Show APK contents
-        run: |
-          ls -R wine_apk | head -100
+          mkdir install_apk
+          unzip install.apk -d wine_apk
 
       - name: Search ABI folders
         run: |
           echo "Searching armeabi-v7a:"
-          find wine_apk -iname "*armeabi-v7a*" -print
+          find install_apk -iname "*armeabi-v7a*" -print
 
           echo ""
           echo "Searching arm64:"
-          find wine_apk -iname "*arm64*" -print
+          find install_apk -iname "*arm64*" -print
 
       - name: Check windows-arm support
         run: |
-          find wine_apk -iname "*arm*"
+          find install_apk -iname "*arm*"
 
       - name: Check windows-x86 support
         run: |
-          find wine_apk -iname "*x86*"
-
-      - name: Check native libraries
-        run: |
-          find wine_apk/lib -type f -name "*.so" -exec file {} \;
+          find install_apk -iname "*x86*"
