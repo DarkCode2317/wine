@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Download APK
         run: |
-          wget -O install.apk "https://github.com/brunodev85/winlator/releases/download/v8.0.0/Winlator_8.0.Revision.1.apk"
+          wget -O install.apk "https://github.com/brunodev85/winlator/releases/download/v7.1.0/Winlator_7.1.apk"
 
       - name: Extract APK
         run: |
@@ -26,10 +26,7 @@ jobs:
           echo "Searching arm64:"
           find install_apk -iname "*arm64*" -print
 
-      - name: Check windows-arm support
+      - name: Check box64
         run: |
-          find install_apk -iname "*arm*"
-
-      - name: Check windows-x86 support
-        run: |
-          find install_apk -iname "*x86*"
+          find install_apk -iname "*box64*"
+          find install_apk -iname "*aarch64*"
