@@ -1,0 +1,26 @@
+name: Download and Extract Wine Apk
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download APK
+        run: |
+          wget -O wine.apk "https://dl.winehq.org/wine-builds/android/wine-3.0-arm.apk"
+
+      - name: Extract APK
+        run: |
+          mkdir wine_apk
+          unzip wine.apk -d wine_apk
+
+      - name: Show APK contents
+        run: |
+          ls -R wine_apk | head -100
+
+      - name: Check native libraries
+        run: |
+          find wine_apk/lib -type f -name "*.so" -exec file {} \;
