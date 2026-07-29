@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Download APK
         run: |
-          wget -O install.apk "https://github.com/brunodev85/winlator/releases/download/v11.1.0/Winlator_11.1.apk"
+          wget -O install.apk "https://github.com/brunodev85/winlator/releases/download/v11.1.0/Winlator_7.1.apk"
 
       - name: Extract APK
         run: |
