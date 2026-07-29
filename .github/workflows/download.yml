@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Download APK
         run: |
-          wget -O wine.apk "https://dl.winehq.org/wine-builds/android/wine-3.0-arm.apk"
+          wget -O wine.apk "https://dl.winehq.org/wine-builds/android/wine-7.0-arm.apk"
 
       - name: Extract APK
         run: |
