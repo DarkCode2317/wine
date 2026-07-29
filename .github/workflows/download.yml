@@ -30,6 +30,14 @@ jobs:
           echo "Searching arm64:"
           find wine_apk -iname "*arm64*" -print
 
+      - name: Check windows-arm support
+        run: |
+          find wine_apk -iname "*arm*"
+
+      - name: Check windows-x86 support
+        run: |
+          find wine_apk -iname "*x86*"
+
       - name: Check native libraries
         run: |
           find wine_apk/lib -type f -name "*.so" -exec file {} \;
