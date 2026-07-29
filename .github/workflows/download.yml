@@ -21,6 +21,15 @@ jobs:
         run: |
           ls -R wine_apk | head -100
 
+      - name: Search ABI folders
+        run: |
+          echo "Searching armeabi-v7a:"
+          find wine_apk -iname "*armeabi-v7a*" -print
+
+          echo ""
+          echo "Searching arm64:"
+          find wine_apk -iname "*arm64*" -print
+
       - name: Check native libraries
         run: |
           find wine_apk/lib -type f -name "*.so" -exec file {} \;
