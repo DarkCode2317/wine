@@ -15,7 +15,7 @@ jobs:
       - name: Extract APK
         run: |
           mkdir install_apk
-          unzip install.apk -d wine_apk
+          unzip install.apk -d install_apk
 
       - name: Search ABI folders
         run: |
