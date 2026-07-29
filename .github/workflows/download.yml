@@ -1,4 +1,4 @@
-name: Download and Extract Wine Apk
+name: Download and Extract Apk
 
 on:
   workflow_dispatch:
