@@ -32,3 +32,6 @@ jobs:
           find install_apk -iname "*aarch64*"
           find install_apk -iname "*wine64*"
           find install_apk -iname "*x86_64*"
+      - name: Check heavy
+        run: |
+          find install_apk -type f -printf "%12s %p\n" | sort -nr | head -50
