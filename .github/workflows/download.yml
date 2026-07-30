@@ -17,6 +17,14 @@ jobs:
           mkdir install_apk
           unzip install.apk -d install_apk
 
+      - name: List 86 of apk
+        run: |
+          echo "=====Folders:"
+          find install_apk -type d -iname "*86*" | sort
+          echo
+          echo "=====Files:"
+          find install_apk -type f -iname "*86*" | sort
+
       - name: List 64 of apk
         run: |
           echo "=====Folders:"
