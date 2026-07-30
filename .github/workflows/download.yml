@@ -17,12 +17,20 @@ jobs:
           mkdir install_apk
           unzip install.apk -d install_apk
 
+      - name: List 64 of apk
+        run: |
+          echo "=====Folders:"
+          find install_apk -type d -iname "*64*" | sort
+          echo
+          echo"=====Files:"
+          find install_apk -type f -iname "*64*" | sort
+
       - name: Extract imagefs.txz
         run: |
           mkdir -p imagefs
           tar -xf install_apk/assets/imagefs.txz -C imagefs
 
-      - name: Check 64
+      - name: List 64 of imagefs
         run: |
           echo "===== Directories containing '64' ====="
           find imagefs -type d -iname "*64*" | sort
