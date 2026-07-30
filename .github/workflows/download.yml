@@ -40,5 +40,5 @@ jobs:
           rm -rf imagefs/opt/wine/lib/wine/x86_64-unix
           rm -rf imagefs/opt/wine/lib/wine/x86_64-windows
 
-          echo "Remaining directories containing '64':"
-          find imagefs -type d -iname "*64*" | sort || true
+          echo "Remaining files containing '64':"
+          find imagefs -type f -iname "*64*" | sort || true
