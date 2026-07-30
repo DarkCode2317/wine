@@ -22,7 +22,7 @@ jobs:
           echo "=====Folders:"
           find install_apk -type d -iname "*64*" | sort
           echo
-          echo"=====Files:"
+          echo "=====Files:"
           find install_apk -type f -iname "*64*" | sort
 
       - name: Extract imagefs.txz
