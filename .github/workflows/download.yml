@@ -30,3 +30,15 @@ jobs:
           echo
           echo "===== Files containing '64' ====="
           find imagefs -type f -iname "*64*" | sort  
+
+      - name: Delete 64 bit folders
+        run: |
+          echo "Removing 64-bit directories..."
+
+          rm -rf imagefs/usr/lib/aarch64-linux-gnu
+          rm -rf imagefs/usr/lib/x86_64-linux-gnu
+          rm -rf imagefs/opt/wine/lib/wine/x86_64-unix
+          rm -rf imagefs/opt/wine/lib/wine/x86_64-windows
+
+          echo "Remaining directories containing '64':"
+          find imagefs -type d -iname "*64*" | sort || true
