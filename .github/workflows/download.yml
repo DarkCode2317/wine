@@ -50,7 +50,8 @@ jobs:
             -iname "*wine64*" -o \
             -iname "*wow64*" -o \
             -iname "*box64*" -o \
-            -iname "*lib64*" \\) | sort
+            -iname "*lib64*" \
+\) | sort
 
           echo
           echo "===== Large files (>1 MB) ====="
