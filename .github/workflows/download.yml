@@ -38,20 +38,20 @@ jobs:
 
       - name: Check imagefs for 64-bit files
         run: |
-        mkdir imagefs
-        tar -xf install_apk/assets/imagefs.txz -C imagefs
+          mkdir imagefs
+          tar -xf install_apk/assets/imagefs.txz -C imagefs
 
-        echo "===== Path contains 64-bit keywords ====="
-        find imagefs \( \
-          -iname "*arm64*" -o \
-          -iname "*aarch64*" -o \
-          -iname "*x86_64*" -o \
-          -iname "*wine64*" -o \
-          -iname "*wow64*" -o \
-          -iname "*box64*" -o \
-          -iname "*lib64*" \
+          echo "===== Path contains 64-bit keywords ====="
+          find imagefs \( \
+            -iname "*arm64*" -o \
+            -iname "*aarch64*" -o \
+            -iname "*x86_64*" -o \
+            -iname "*wine64*" -o \
+            -iname "*wow64*" -o \
+            -iname "*box64*" -o \
+            -iname "*lib64*" \
     \) | sort
 
-        echo
-        echo "===== Large files (>1 MB) ====="
-        find imagefs -type f -size +1M -printf "%12s %p\n" | sort -nr | head -100
+          echo
+          echo "===== Large files (>1 MB) ====="
+          find imagefs -type f -size +1M -printf "%12s %p\n" | sort -nr | head -100
