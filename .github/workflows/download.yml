@@ -53,6 +53,13 @@ jobs:
             -iname "*lib64*" \
           \) | sort
 
-          echo
-          echo "===== Large files (>1 MB) ====="
-          find imagefs -type f -size +1M -printf "%12s %p\n" | sort -nr | head -100
+      - name: Check size
+        run: |
+          du -sh imagefs/usr/lib/aarch64-linux-gnu
+          du -sh imagefs/usr/lib/arm-linux-gnueabihf
+
+          du -sh imagefs/opt/wine/lib/wine/x86_64-windows
+          du -sh imagefs/opt/wine/lib/wine/i386-windows
+
+          du -sh imagefs/opt/wine/lib/wine/x86_64-unix
+          du -sh imagefs/opt/wine/lib/wine/i386-unix     
