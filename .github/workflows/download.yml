@@ -35,3 +35,7 @@ jobs:
       - name: Check heavy
         run: |
           find install_apk -type f -printf "%12s %p\n" | sort -nr | head -50
+
+      - name: Check imagefs.txz
+        run: |
+          tar -tf install_apk/assets/imagefs.txz | head -100
