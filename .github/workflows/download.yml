@@ -17,49 +17,16 @@ jobs:
           mkdir install_apk
           unzip install.apk -d install_apk
 
-      - name: Search ABI folders
+      - name: Extract imagefs.txz
         run: |
-          echo "Searching armeabi-v7a:"
-          find install_apk -iname "*armeabi-v7a*" -print
-
-          echo ""
-          echo "Searching arm64:"
-          find install_apk -iname "*arm64*" -print
-
-      - name: Check box64
-        run: |
-          find install_apk -iname "*box64*"
-          find install_apk -iname "*aarch64*"
-          find install_apk -iname "*wine64*"
-          find install_apk -iname "*x86_64*"
-
-      - name: Check heavy
-        run: |
-          find install_apk -type f -printf "%12s %p\n" | sort -nr | head -50
-
-      - name: Check imagefs for 64-bit files
-        run: |
-          mkdir imagefs
+          mkdir -p imagefs
           tar -xf install_apk/assets/imagefs.txz -C imagefs
 
-          echo "===== Path contains 64-bit keywords ====="
-          find imagefs \( \
-            -iname "*arm64*" -o \
-            -iname "*aarch64*" -o \
-            -iname "*x86_64*" -o \
-            -iname "*wine64*" -o \
-            -iname "*wow64*" -o \
-            -iname "*box64*" -o \
-            -iname "*lib64*" \
-          \) | sort
-
-      - name: Check size
+      - name: Check 64
         run: |
-          du -sh imagefs/usr/lib/aarch64-linux-gnu
-          du -sh imagefs/usr/lib/arm-linux-gnueabihf
+          echo "===== Directories containing '64' ====="
+          find imagefs -type d -iname "*64*" | sort
 
-          du -sh imagefs/opt/wine/lib/wine/x86_64-windows
-          du -sh imagefs/opt/wine/lib/wine/i386-windows
-
-          du -sh imagefs/opt/wine/lib/wine/x86_64-unix
-          du -sh imagefs/opt/wine/lib/wine/i386-unix     
+          echo
+          echo "===== Files containing '64' ====="
+          find imagefs -type f -iname "*64*" | sort  
