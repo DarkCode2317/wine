@@ -17,6 +17,10 @@ jobs:
           mkdir install_apk
           unzip install.apk -d install_apk
 
+      - name: List largest files
+        run: |
+          find . -type f -exec du -h {} + | sort -hr | head -n 20
+
       - name: List 86 of apk
         run: |
           echo "=====Folders:"
