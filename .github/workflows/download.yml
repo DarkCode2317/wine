@@ -34,6 +34,7 @@ jobs:
           find install_apk -type f -iname "*64*" | sort
 
       - name: Remove 64 bit folders and files
+        run: |
 
       - name: Extract imagefs.txz
         run: |
