@@ -33,6 +33,8 @@ jobs:
           echo "=====Files:"
           find install_apk -type f -iname "*64*" | sort
 
+      - name: Remove 64 bit folders and files
+
       - name: Extract imagefs.txz
         run: |
           mkdir -p imagefs
